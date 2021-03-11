@@ -9,12 +9,13 @@ int main(void) {
     // over and over =  while loop
     
     int variable;
+    
     int result = scanf("%d", &variable);
     while (result == 1) {
         // keep going
         // increment
         result = scanf("%d", &variable);
-    }
+    } 
     
     // print goodbye
     printf("Goodbye\n");
