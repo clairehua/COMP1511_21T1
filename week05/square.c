@@ -2,14 +2,10 @@
 
 #define SIZE 7
 
-// Takes a 2D array of ints and multiplies every value in the array by a given int
-// void scalar_multiply(int rows, int columns, int matrix[rows][columns],  int scalar);
-
 // prototypes
 void print_map(int map[SIZE][SIZE]);
 void scalar_multiply(int rows, int columns, int matrix[rows][columns], 
                      int scalar);
-                     
                      
                      
 int main(void) {
@@ -76,7 +72,8 @@ void print_map(int map[SIZE][SIZE]) {
     }
 }
 
-//comment
+// Takes a 2D array of ints and multiplies every value in the array by a 
+// given int
 void scalar_multiply(int rows, int columns, int matrix[rows][columns], 
                      int scalar) {
     int row, column;

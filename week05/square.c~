@@ -11,7 +11,6 @@ void scalar_multiply(int rows, int columns, int matrix[rows][columns],
                      int scalar);
                      
                      
-                     
 int main(void) {
     int row, column;
 
@@ -76,7 +75,7 @@ void print_map(int map[SIZE][SIZE]) {
     }
 }
 
-//comment
+// takes in a 2D array 'matrix' and multiplies each value by the input scalar
 void scalar_multiply(int rows, int columns, int matrix[rows][columns], 
                      int scalar) {
     int row, column;
