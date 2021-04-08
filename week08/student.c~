@@ -1,0 +1,101 @@
+// Tutorial examples on structs
+    // Create a struct that represents a student
+    // Create a function that creates a new student struct
+    // Create a struct that represents a class
+
+
+
+#define MAX_NAME_LENGTH 100
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+// struct student
+    // name ("Frankie")
+    // zid (5151515)
+    // mark (60.2)
+    
+struct student {
+    char name[MAX_NAME_LENGTH];
+    int zid;
+    double mark;
+    struct student *next;
+};
+
+struct class {
+    struct student *head;
+    char name[MAX_NAME_LENGTH];
+    int num_students;
+};
+
+struct student *create_student(char name[MAX_NAME_LENGTH], int zid, double mark);
+
+int main(void) {
+    // 4. Create a struct student with the name "Frankie", zid of 5151515, 
+    // assignment 1 mark of 60.2 in the main function 
+    // (hint, you do not need functions or malloc).
+    struct student first_student;
+    // we can't equate arrays
+    strcpy(first_student.name, "Frankie");
+    first_student.zid = 5151515;
+    first_student.mark = 60.2;
+    first_student.next = NULL;
+
+    // 5. call function to create a struct student * with the name "Chicken", 
+    // zid of 5252525, assignment 1 mark of 71 using a function 
+    // (hint, you will need to use malloc)
+    struct student *second_student = create_student("Chicken", 5252525, 71);
+    
+    // 7. Print the name, zid, and mark of both students
+    //printf("%s\n", first_student.name);
+    //printf("%s\n", second_student->name);
+    
+    
+    // 9. Build a linked list to represent a class of students by adding 
+    // new students at the head of the list.
+    struct student *head = second_student;
+    second_student->next = &first_student;
+
+
+    // 10
+    
+    struct class h13c;
+    h13c.head = head;
+    h13c.num_students = 2; 
+    strcpy(h13c.name, "my class");
+    
+    
+    // EXTRA: Print out the names of ALL the students in the class
+    
+    // make a copy
+    struct student *curr = head;
+    
+    while (curr != NULL) {
+        printf("%s\n", curr->name);    
+        curr = curr->next;
+    }    
+    
+       
+
+    free(second_student);
+    
+    return 0;
+}
+
+
+// function that creates and returns a struct student *
+struct student *create_student(char name[MAX_NAME_LENGTH], int zid, double mark) {
+    struct student *new_student = malloc(sizeof(struct student));
+    strcpy(new_student->name, name);
+    new_student->zid = zid;
+    new_student->mark = mark;
+    new_student->next = NULL;
+    return new_student;
+}
+
+
+
+
+
+
