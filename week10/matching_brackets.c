@@ -1,0 +1,98 @@
+// Author: Dean Wunder (d.wunder@unsw.edu.au)
+// Using a stack to match brackets
+
+#include <stdio.h>
+#include "stack.h"
+
+int opening_bracket(int bracket);
+int closing_bracket(int bracket);
+int brackets_match(int opening, int closing);
+
+int main(int argc, char *argv[]) {
+
+    // read in string from command line
+    // check that input is valid
+    if (argc != 2) {
+        // means there is no string
+        printf("Incorrect usage. Use: ./matching_brackets ""bracket sequence\n");
+        return 0;
+    }
+    
+    // giving it a useful name - "{{}}[]()"
+    char *brackets = argv[1];
+    
+    
+    // create stack (plate)
+    Stack my_stack = create_stack();
+        
+    // pass string through functions (one character at a time - while loop?)
+    int i = 0;
+    int valid = 1;
+    // loop through each character in my string (char array)
+    while (brackets[i] != '\0' && valid == 1) {
+        // push opening brackets on a stack
+        if (opening_bracket(brackets[i]) == 1) {
+            stack_push(my_stack, brackets[i]);
+        } 
+        // check it is actually a closing bracket
+        if (closing_bracket(brackets[i])) {
+            //if the stack is empty, then the closing bracket has no match
+            if (stack_size(my_stack) == 0) {
+                valid = 0;
+            } else {
+                char bracket_from_stack = stack_pop(my_stack);
+                if (!brackets_match(bracket_from_stack, brackets[i])) {
+                    valid = 0;
+                }
+            }
+        }
+        i++;
+    
+    }
+   
+    
+    // we have now gone through the whole string
+    // if the stack is not empty, then it also is invalid
+    if (valid == 0 || stack_size(my_stack) != 0) {
+        printf("Invalid bracket sequence!\n");
+    } else {
+        printf("All brackets match!\n");
+    }
+    
+    // free all our memory
+    free_stack(my_stack);
+    
+    
+    return 0;
+}
+
+
+// checks if it is an opening bracket and returns 1 if true
+int opening_bracket(int bracket) {
+    if (bracket == '(' || bracket == '{' || bracket == '[') {
+        return 1;
+    }
+    return 0;
+}
+
+// checks if it is an closing bracket and returns 1 if true
+int closing_bracket(int bracket) {
+    if (bracket == ')' || bracket == '}' || bracket == ']') {
+        return 1;
+    }
+    return 0;
+}
+
+// checks if the brackets are a pair (match) and returns 1 if true
+int brackets_match(int opening, int closing) {
+    if (opening == '(' && closing == ')') {
+        return 1;
+    }
+    if (opening == '{' && closing == '}') {
+        return 1;
+    }
+    if (opening == '[' && closing == ']') {
+        return 1;
+    }
+    return 0;
+}

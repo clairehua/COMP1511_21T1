@@ -157,7 +157,7 @@ void test_set_union(void) {
     free_list(test4);
     free_list(test5);
 
-    printf("All tests passed! You are awesome!\n");
+    printf("All tests passed! You are awesome!\n");list_ap
 }
 
 void test_set_intersection(void) {
